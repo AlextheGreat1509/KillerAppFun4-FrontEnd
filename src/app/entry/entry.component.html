@@ -2,10 +2,23 @@
 
 <h3>{{ success }} </h3>
 
+<div class="container">
 <div class="form-group">
+  <div class="row">
   <label>Entry:</label>
+  </div>
+  <div class="row">
+    <div class="col">
+      <label>Problem: </label>
   <input type="text" name="problem" id="problem" required [(ngModel)]="problem" [(value)]="problem" class="form-control">
+      <label>Solution: </label>
   <input type="text" name="solution" id="solution" required [(ngModel)]="solution" [(value)]="solution" class="form-control">
-  <button name="submit" id="submit" (click)="submitEntry()">Submit Entry here</button>
+  </div>
+    <div class="col">
+  <button class="btn btn-primary" name="submit" id="submit" (click)="submitEntry()">Submit Entry here</button>
+    </div>
+  </div>
 </div>
+  </div>
+
 
