@@ -1,0 +1,11 @@
+<h2>Input Entries: </h2>
+
+<h3>{{ success }} </h3>
+
+<div class="form-group">
+  <label>Entry:</label>
+  <input type="text" name="problem" id="problem" required [(ngModel)]="problem" [(value)]="problem" class="form-control">
+  <input type="text" name="solution" id="solution" required [(ngModel)]="solution" [(value)]="solution" class="form-control">
+  <button name="submit" id="submit" (click)="submitEntry()">Submit Entry</button>
+</div>
+
