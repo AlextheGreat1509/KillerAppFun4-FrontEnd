@@ -1,16 +1,12 @@
 language: node_js
 node_js:
-- "9"
+- "8"
 sudo: true
 dist: trusty
 
 branches:
   only:
   - master
-
-cache:
-    directories:
-    - node_modules
 
 before_script:
 - export CHROME_BIN=/usr/bin/google-chrome
@@ -29,7 +25,7 @@ script:
 - ng build
 - yarn lint
 - yarn build --base-href   https://alexthegreat1509.github.io/KillerAppFun4-FrontEnd/
-  
+
 deploy:
   provider: pages
   skip_cleanup: true
