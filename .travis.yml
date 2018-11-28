@@ -1,12 +1,16 @@
 language: node_js
 node_js:
-- "8"
+- "9"
 sudo: true
 dist: trusty
 
 branches:
   only:
   - master
+
+cache:
+    directories:
+    - node_modules
 
 before_script:
 - export CHROME_BIN=/usr/bin/google-chrome
@@ -17,6 +21,19 @@ before_script:
 - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 - sudo dpkg -i google-chrome*.deb
 
+install:
+- npm install -g yarn
+
 script:
 - npm run e2e
 - ng build
+- yarn lint
+- yarn build --base-href   https://alexthegreat1509.github.io/KillerAppFun4-FrontEnd/
+  
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: dist/Killerapp-FrontEnd
+  on:
+    branch: master
