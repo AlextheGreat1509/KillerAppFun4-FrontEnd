@@ -1,24 +1,15 @@
-<h2>Input Entries: </h2>
-
-<h3>{{ success }} </h3>
-
-<div class="container">
-<div class="form-group">
-  <div class="row">
-  <label>Entry:</label>
-  </div>
-  <div class="row">
-    <div class="col">
-      <label>Problem: </label>
-  <input type="text" name="problem" id="problem" required [(ngModel)]="problem" [(value)]="problem" class="form-control">
-      <label>Solution: </label>
-  <input type="text" name="solution" id="solution" required [(ngModel)]="solution" [(value)]="solution" class="form-control">
-  </div>
-    <div class="col">
-  <button class="btn btn-primary" name="submit" id="submit" (click)="submitEntry()">Submit Entry here</button>
+<div class="form-group" >
+  <div class = "row" *ngFor="let item of inputsDutch; let i=index; trackBy:trackByFn">
+    <div class = "col-6">
+    <input class="form-control" placeholder="Nederlandse woord" required="required" [(ngModel)]="inputsDutch[i]" (change)="update()">
+    </div>
+    <div class = "col-6">
+    <input class="form-control" placeholder="Engelse vertaling" required="required" [(ngModel)]="inputsEnglish[i]" (change)="update()">
     </div>
   </div>
+  <button (click)="submitEntry()" value="Submit" class="btn btn-primary">Submit</button>
 </div>
-  </div>
+
+
 
 

@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {forEach} from '@angular/router/src/utils/collection';
+
 
 @Component({
-  selector: 'app-products',
+  selector: 'app-entries',
   templateUrl: './entry.component.html',
   styleUrls: ['./entry.component.css']
 })
@@ -10,8 +12,32 @@ export class EntryComponent implements OnInit {
   public problem: string;
   public solution: string;
   public success: string;
+  public inputsDutch : string[];
+  public inputsEnglish : string[];
 
-  constructor(private http: HttpClient) {
+  constructor( private http: HttpClient) {
+    this.inputsDutch = [""];
+    this.inputsEnglish = [""];
+  }
+
+  ngOnInit() {
+
+  }
+  trackByFn(index: any, item: any) {
+    return index;
+  }
+  update(): void {
+    if(this.inputsDutch[this.inputsDutch.length - 1].trim() !== ""){
+      this.inputsDutch.push("");
+      this.inputsEnglish.push("");
+    }
+    for (var i = 0; i < this.inputsDutch.length; i++){
+      if (this.inputsDutch[i].trim() == "" && this.inputsDutch[i-1].trim() == "" && this.inputsEnglish[i].trim() == ""){
+        this.inputsDutch.splice(i, 1);
+        this.inputsEnglish.splice(i, 1);
+      }
+    }
+
   }
 
   public submitEntry(): void {
@@ -32,9 +58,6 @@ export class EntryComponent implements OnInit {
       () => {
         // The POST observable is now completed
       });
-  }
-
-  ngOnInit(): void {
   }
 }
 
