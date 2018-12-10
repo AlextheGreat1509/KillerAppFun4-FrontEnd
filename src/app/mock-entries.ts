@@ -1,5 +1,5 @@
-import { Entry } from './Entry';
+import { Entry } from '../models/Entry';
 
 export const Entries: Entry[] = [
-  { problem: 'Vlinder', solution: 'Butterfly'}
+  { problem: 'Vlinder', translation: 'Butterfly'}
 ];

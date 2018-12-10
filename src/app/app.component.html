@@ -1,7 +1,7 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <nav class="navbar navbar-expand-lg navbar-light bg-light" routerLinkActive="active">
-  <a class="navbar-brand" routerLink="/home">Learning App</a>
+  <a class="navbar-brand" id="title" routerLink="/home">Learning App</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -9,10 +9,9 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li routerLinkActive="active" class="nav-item">
-        <a routerLink="/addEntry" class="nav-link">add word</a></li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">My List</a>
-      </li>
+        <a routerLink="/addEntry" class="nav-link">Create EntryList</a></li>
+      <li routerLinkActive="active" class="nav-item">
+        <a routerLink="/displayLists" class="nav-link">My Lists</a></li>
     </ul>
   </div>
 </nav>

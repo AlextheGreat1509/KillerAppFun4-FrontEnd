@@ -46,7 +46,7 @@ export class EntryComponent implements OnInit {
         'Content-Type': 'application/json'
       })
     };
-    const entry = JSON.stringify({problem: this.problem, solution: this.solution});
+    const entry = JSON.stringify({problemWords: this.inputsDutch, translationWords: this.inputsEnglish});
     this.http.post('http://localhost:8090/api/submit', entry, httpOptions).subscribe(
       (val) => {
         // POST call successful value returned in body

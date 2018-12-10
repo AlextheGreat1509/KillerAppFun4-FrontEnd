@@ -10,3 +10,9 @@
 .form-control{
   margin-top: 5px;
 }
+
+h1{
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
