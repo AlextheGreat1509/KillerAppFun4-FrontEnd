@@ -26,6 +26,7 @@ export class EntryComponent implements OnInit {
   trackByFn(index: any, item: any) {
     return index;
   }
+
   update(): void {
     if(this.inputsDutch[this.inputsDutch.length - 1].trim() !== ""){
       this.inputsDutch.push("");
