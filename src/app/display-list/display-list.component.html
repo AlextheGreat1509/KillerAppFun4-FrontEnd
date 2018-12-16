@@ -1,0 +1,36 @@
+<div id="accordion">
+  <div class="listGroup" *ngFor="let item of lists; let i=index; trackBy:trackByFn">
+  <div class="card">
+    <div class="card-header" [attr.id]="'List' + i">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" [attr.data-target]="'#collapse' + i" aria-expanded="false" [attr.aria-controls]="'collapse' + i">
+          Wordlist id: {{lists[i].id}}
+        </button>
+      </h5>
+    </div>
+
+    <div [attr.id]="'collapse' + i" class="collapse show" [attr.aria-labelledby]="'List' + i" data-parent="#accordion">
+      <div class="card-body">
+        <div class="row">
+          <div class = "col-6">
+            <label>Dutch:</label>
+          </div>
+          <div class = "col-6">
+            <label>English:</label>
+          </div>
+        </div>
+        <div class = "row" *ngFor="let item of lists[i].listEntries; let j=index; trackBy:trackByFn">
+          <div class = "col-6">
+            <input class="form-control" placeholder="Nederlandse woord" required="required" [(ngModel)]="lists[i].listEntries[j].problem" (change)="update()">
+          </div>
+          <div class = "col-6">
+            <input class="form-control" placeholder="Engelse vertaling" required="required" [(ngModel)]="lists[i].listEntries[j].translation" (change)="update()">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
