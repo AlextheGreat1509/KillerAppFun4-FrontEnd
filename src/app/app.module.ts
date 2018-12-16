@@ -10,11 +10,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { DisplayListComponent } from './display-list/display-list.component';
+import { QuizComponent } from './quiz/quiz.component';
 
 const appRoutes: Routes = [
   { path: 'addEntry', component: EntryComponent },
   { path: 'home', component: HomeComponent },
   { path: 'displayLists', component: DisplayListComponent},
+  { path: 'quiz',  component: QuizComponent},
   { path: '', component: HomeComponent },
 ];
 
@@ -24,6 +26,7 @@ const appRoutes: Routes = [
     EntryComponent,
     HomeComponent,
     DisplayListComponent,
+    QuizComponent,
   ],
   imports: [
     BrowserModule,
