@@ -1,5 +1,6 @@
 <h1>Create your List</h1>
 <div class="form-group" >
+  <input class="form-control" placeholder="Your title here" required="required" [(ngModel)]="listTitle">
   <div class = "row" *ngFor="let item of inputsDutch; let i=index; trackBy:trackByFn">
     <div class = "col-6">
     <input class="form-control" placeholder="Nederlandse woord" required="required" [(ngModel)]="inputsDutch[i]" (change)="update()">

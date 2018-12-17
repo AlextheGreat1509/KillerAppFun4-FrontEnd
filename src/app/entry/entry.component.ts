@@ -14,6 +14,7 @@ export class EntryComponent implements OnInit {
   public success: string;
   public inputsDutch : string[];
   public inputsEnglish : string[];
+  public listTitle: string;
 
   constructor( private http: HttpClient) {
     this.inputsDutch = [""];
@@ -47,7 +48,7 @@ export class EntryComponent implements OnInit {
         'Content-Type': 'application/json'
       })
     };
-    const entry = JSON.stringify({problemWords: this.inputsDutch, translationWords: this.inputsEnglish});
+    const entry = JSON.stringify({problemWords: this.inputsDutch, translationWords: this.inputsEnglish, title: this.listTitle});
     this.http.post('http://localhost:8090/api/submit', entry, httpOptions).subscribe(
       (val) => {
         // POST call successful value returned in body

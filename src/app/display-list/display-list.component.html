@@ -1,15 +1,23 @@
+<h1>Your Lists: </h1>
 <div id="accordion">
   <div class="listGroup" *ngFor="let item of lists; let i=index; trackBy:trackByFn">
   <div class="card">
     <div class="card-header" [attr.id]="'List' + i">
       <h5 class="mb-0">
-        <button class="btn btn-link" data-toggle="collapse" [attr.data-target]="'#collapse' + i" aria-expanded="false" [attr.aria-controls]="'collapse' + i">
-          Wordlist id: {{lists[i].id}}
+        <div class="row">
+          <div class="col-9">
+        <button class="btn btn-text" data-toggle="collapse" [attr.data-target]="'#collapse' + i" aria-expanded="false" [attr.aria-controls]="'collapse' + i">
+          <h5>Wordlist: {{lists[i].title}} </h5>
         </button>
+          </div>
+          <div class="col-3">
+        <button class="btn btn-primary" (click)="quizById(i)">Learn this list</button>
+          </div>
+        </div>
       </h5>
     </div>
 
-    <div [attr.id]="'collapse' + i" class="collapse show" [attr.aria-labelledby]="'List' + i" data-parent="#accordion">
+    <div [attr.id]="'collapse' + i" class="collapse" [attr.aria-labelledby]="'List' + i" data-parent="#accordion">
       <div class="card-body">
         <div class="row">
           <div class = "col-6">

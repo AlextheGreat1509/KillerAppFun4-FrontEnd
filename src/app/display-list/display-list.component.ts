@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {WordLists} from '../../models/WordLists';
+import {WordList} from '../../models/WordList';
+import {NavigationExtras, Router} from '@angular/router';
+import {logger} from 'codelyzer/util/logger';
 @Component({
   selector: 'app-display-list',
   templateUrl: './display-list.component.html',
@@ -8,9 +10,9 @@ import {WordLists} from '../../models/WordLists';
 })
 export class DisplayListComponent implements OnInit {
 
-  public lists: WordLists[] = [];
+  public lists: WordList[] = [];
   private original;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   trackByFn(index: any, item: any) {
     return index;
@@ -23,11 +25,11 @@ export class DisplayListComponent implements OnInit {
       })
     };
 
-    this.http.get<WordLists>('http://localhost:8090/api/getlists', httpOptions).subscribe(
+    this.http.get<WordList>('http://localhost:8090/api/getlists', httpOptions).subscribe(
       (val) => {
         // POST call successful value returned in body
-        console.log(val);
         this.original = val;
+        console.log(val)
         for (var i = 0; i < this.original.length; i++) {
           this.lists[i] = val[i];
         }
@@ -38,7 +40,6 @@ export class DisplayListComponent implements OnInit {
       },
       () => {
         // The POST observable is now completed
-        console.log(this.lists[0].listEntries[0].id);
       });
   }
 
@@ -46,4 +47,7 @@ export class DisplayListComponent implements OnInit {
     this.getLists();
   }
 
+  quizById(id: any) {
+    this.router.navigate(['quiz'] , { queryParams: { "wordListId": this.lists[id].id } });
+  }
 }
