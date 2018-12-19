@@ -1,12 +1,43 @@
 <h1>Create your List</h1>
 <div class="form-group" >
-  <input class="form-control" placeholder="Your title here" required="required" [(ngModel)]="listTitle">
-  <div class = "row" *ngFor="let item of inputsDutch; let i=index; trackBy:trackByFn">
+  <div class="row">
+    <div class="col-12">
+    <div *ngIf="error == true">
+      <div class="alert alert-danger" role="alert">
+        Oops, it appears you missed a field
+      </div>
+    </div>
+    </div>
+    <div class="col-12">
+      <label>List info:</label>
+    </div>
+    <div class="col-12">
+      <input class="form-control" placeholder="Your title here" required="required" [(ngModel)]="listTitle">
+    </div>
+  </div>
+  <div class="row">
     <div class = "col-6">
-    <input class="form-control" placeholder="Nederlandse woord" required="required" [(ngModel)]="inputsDutch[i]" (change)="update()">
+      <select class="form-control" name="problemLanguage" [(ngModel)]="problemLanguage">
+        <option [ngValue]="undefined" disabled  selected>Select problem language here </option>
+        <option *ngFor="let select of languageList"> {{ select }}</option>
+      </select>
     </div>
     <div class = "col-6">
-    <input class="form-control" placeholder="Engelse vertaling" required="required" [(ngModel)]="inputsEnglish[i]" (change)="update()">
+      <select class="form-control" name="translationLanguage" [(ngModel)]="translationLanguage">
+        <option [ngValue]="undefined" disabled  selected>Select translation language here </option>
+        <option *ngFor="let select of languageList"> {{ select }}</option>
+      </select>
+    </div>
+    <div class="col-12">
+      <label>Words:</label>
+    </div>
+  </div>
+  <div class = "row" *ngFor="let item of inputsProblem; let i=index; trackBy:trackByFn">
+    <div class = "col-6">
+    <input class="form-control" placeholder="Problem word" required="required" [(ngModel)]="inputsProblem[i]" (change)="update()">
+    </div>
+    <div class = "col-6">
+    <input class="form-control" placeholder="Translation" required="required" [(ngModel)]="inputsTranslation[i]" (change)="update()">
     </div>
   </div>
   <button (click)="submitEntry()" value="Submit" class="btn btn-primary">Submit</button>

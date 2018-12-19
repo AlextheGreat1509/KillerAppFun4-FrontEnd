@@ -21,10 +21,10 @@
       <div class="card-body">
         <div class="row">
           <div class = "col-6">
-            <label>Dutch:</label>
+            <label>{{lists[i].problemLanguage}}:</label>
           </div>
           <div class = "col-6">
-            <label>English:</label>
+            <label>{{lists[i].translationLanguage}}:</label>
           </div>
         </div>
         <div class = "row" *ngFor="let item of lists[i].listEntries; let j=index; trackBy:trackByFn">

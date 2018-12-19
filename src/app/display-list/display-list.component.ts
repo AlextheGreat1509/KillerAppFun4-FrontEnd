@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {WordList} from '../../models/WordList';
 import {NavigationExtras, Router} from '@angular/router';
-import {logger} from 'codelyzer/util/logger';
+
 @Component({
   selector: 'app-display-list',
   templateUrl: './display-list.component.html',

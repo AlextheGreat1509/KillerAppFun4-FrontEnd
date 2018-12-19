@@ -1,26 +1,38 @@
+<div *ngIf="finished == false; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock>
 <div class="container">
   <h1>Wordlist: {{wordList?.title}}</h1>
   <div class="row clearfix">
   </div>
+  <div *ngIf="correct == true && progress > 0">
+    <div class="alert alert-success" role="alert">
+      Your answer was correct!
+    </div>
+  </div>
+  <div *ngIf="correct == false && progress > 0">
+    <div class="alert alert-danger" role="alert">
+      Your answer was not correct!
+    </div>
+  </div>
   <div class="col-md-1 column">
   </div>
   <div class="col-md-10 column">
-    <p class="lead">You have completed {{progress}}% of the test</p>
+    <p class="lead">You have completed {{progress|number: "1.0-1"}}% of the test</p>
     <div class="progress">
       <div class="progress-bar" role="progressbar" [style.width.%]="progress">
-        {{progress}}%
+        {{progress|number: "1.0-1"}}%
       </div>
     </div>
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h3 class="panel-title">
-        Translate this word: {{problemWord}}
-        </h3>
+        <p class="panel-title">
+          Translate the word: <b>'{{problemWord}}'</b> from <b>{{problemLanguage}}</b> to <b>{{translationLanguage}}</b>
+        </p>
       </div>
       <div class="panel-body">
         <div class="input-group">
           <label>
-            Your Answer: <input class="form-control" name="translationWord" id="translationWord" required="required" [(ngModel)]="userAnswer" placeholder="Give the translation here">
+            Your Answer: <input class="form-control" name="translationWord" id="translationWord" required="required" (keyup.enter)="DoQuiz(userAnswer)" [(ngModel)]="userAnswer" placeholder="Give the translation here">
           </label>
         </div>
       </div>
@@ -32,3 +44,21 @@
     </div>
   </div>
 </div>
+</ng-template>
+<ng-template #elseBlock>
+  <div class="container">
+    <h1>Wordlist: {{wordList?.title}}</h1>
+    <div class="row clearfix">
+    </div>
+    </div>
+    <div class="col-md-1 column">
+    </div>
+    <div class="col-md-12 column">
+      <p class="lead">You have answered {{(score/total)*100|number: "1.0-1"}}% ({{score}} out of {{total}}) of the test correctly</p>
+      <div class="progress">
+        <div class="progress-bar" id="resultBar" role="progressbar" [style.width.%]="(score/total)*100">
+          {{(score/total)*100|number: "1.0-1"}}%
+        </div>
+      </div>
+    </div>
+</ng-template>

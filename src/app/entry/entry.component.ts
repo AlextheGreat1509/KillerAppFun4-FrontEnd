@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {forEach} from '@angular/router/src/utils/collection';
+import {Router} from '@angular/router';
+import {until} from 'selenium-webdriver';
+import titleContains = until.titleContains;
 
 
 @Component({
@@ -9,16 +12,19 @@ import {forEach} from '@angular/router/src/utils/collection';
   styleUrls: ['./entry.component.css']
 })
 export class EntryComponent implements OnInit {
-  public problem: string;
-  public solution: string;
+  public problemLanguage: any;
+  public translationLanguage: any;
   public success: string;
-  public inputsDutch : string[];
-  public inputsEnglish : string[];
+  public inputsProblem : string[];
+  public inputsTranslation : string[];
   public listTitle: string;
+  public languageList: string[];
+  public error: boolean;
 
-  constructor( private http: HttpClient) {
-    this.inputsDutch = [""];
-    this.inputsEnglish = [""];
+  constructor( private http: HttpClient, private router: Router) {
+    this.inputsProblem = [""];
+    this.inputsTranslation = [""];
+    this.languageList = ["Dutch", "English"]
   }
 
   ngOnInit() {
@@ -29,26 +35,30 @@ export class EntryComponent implements OnInit {
   }
 
   update(): void {
-    if(this.inputsDutch[this.inputsDutch.length - 1].trim() !== ""){
-      this.inputsDutch.push("");
-      this.inputsEnglish.push("");
+    if(this.inputsProblem[this.inputsProblem.length - 1].trim() !== ""){
+      this.inputsProblem.push("");
+      this.inputsTranslation.push("");
     }
-    for (var i = 0; i < this.inputsDutch.length; i++){
-      if (this.inputsDutch[i].trim() == "" && this.inputsDutch[i-1].trim() == "" && this.inputsEnglish[i].trim() == ""){
-        this.inputsDutch.splice(i, 1);
-        this.inputsEnglish.splice(i, 1);
+    for (var i = 0; i < this.inputsProblem.length; i++){
+      if (this.inputsProblem[i].trim() == "" && this.inputsProblem[i-1].trim() == "" && this.inputsTranslation[i].trim() == ""){
+        this.inputsProblem.splice(i, 1);
+        this.inputsTranslation.splice(i, 1);
       }
     }
 
   }
 
   public submitEntry(): void {
+    if (this.problemLanguage == undefined  || this.translationLanguage == undefined || this.listTitle == undefined){
+      this.error = true;
+      return;
+    }
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    const entry = JSON.stringify({problemWords: this.inputsDutch, translationWords: this.inputsEnglish, title: this.listTitle});
+    const entry = JSON.stringify({problemWords: this.inputsProblem, translationWords: this.inputsTranslation, title: this.listTitle, problemLanguage: this.problemLanguage, translationLanguage: this.translationLanguage});
     this.http.post('http://localhost:8090/api/submit', entry, httpOptions).subscribe(
       (val) => {
         // POST call successful value returned in body
@@ -58,7 +68,7 @@ export class EntryComponent implements OnInit {
         // POST call in error
       },
       () => {
-        // The POST observable is now completed
+        this.router.navigate(['displayLists']);
       });
   }
 }

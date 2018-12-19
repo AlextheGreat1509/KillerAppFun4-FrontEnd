@@ -11,8 +11,17 @@
   margin-top: 5px;
 }
 
+.alert{
+  margin-top: 10px;
+}
+
 h1{
   text-align: center;
   margin-top: 10px;
   margin-bottom: 20px;
+}
+
+label{
+  margin-top: 15px;
+  margin-bottom: 5px;
 }
