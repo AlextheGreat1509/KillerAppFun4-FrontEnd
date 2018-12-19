@@ -9,7 +9,7 @@ import {NavigationExtras, Router} from '@angular/router';
   styleUrls: ['./display-list.component.css']
 })
 export class DisplayListComponent implements OnInit {
-
+  public noLists: boolean= false;
   public lists: WordList[] = [];
   private original;
   constructor(private http: HttpClient, private router: Router) { }
@@ -36,10 +36,14 @@ export class DisplayListComponent implements OnInit {
 
       },
       response => {
-        // POST call in error
+        if (typeof this.lists == 'undefined' || this.lists.length < 1) {
+          this.noLists = true;
+        }
       },
       () => {
-        // The POST observable is now completed
+        if (typeof this.lists == 'undefined' || this.lists.length < 1) {
+          this.noLists = true;
+        }
       });
   }
 

@@ -1,4 +1,9 @@
 <h1>Your Lists: </h1>
+<div *ngIf="noLists == true">
+  <div class="alert alert-danger" role="alert">
+    You have not yet created a list or our server cannot be reached right now
+  </div>
+</div>
 <div id="accordion">
   <div class="listGroup" *ngFor="let item of lists; let i=index; trackBy:trackByFn">
   <div class="card">
