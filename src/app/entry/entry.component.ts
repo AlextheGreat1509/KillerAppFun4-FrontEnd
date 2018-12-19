@@ -24,7 +24,7 @@ export class EntryComponent implements OnInit {
   constructor( private http: HttpClient, private router: Router) {
     this.inputsProblem = [""];
     this.inputsTranslation = [""];
-    this.languageList = ["Dutch", "English"]
+    this.languageList = ["Dutch", "English", "French", "German"]
   }
 
   ngOnInit() {
@@ -65,7 +65,7 @@ export class EntryComponent implements OnInit {
         this.success = val.toString();
       },
       response => {
-        // POST call in error
+        this.error = true;
       },
       () => {
         this.router.navigate(['displayLists']);
