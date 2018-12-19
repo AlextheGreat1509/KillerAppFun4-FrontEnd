@@ -29,7 +29,6 @@ export class DisplayListComponent implements OnInit {
       (val) => {
         // POST call successful value returned in body
         this.original = val;
-        console.log(val)
         for (var i = 0; i < this.original.length; i++) {
           this.lists[i] = val[i];
         }
