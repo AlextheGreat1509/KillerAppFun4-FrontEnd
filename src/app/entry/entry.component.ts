@@ -20,6 +20,7 @@ export class EntryComponent implements OnInit {
   public listTitle: string;
   public languageList: string[];
   public error: boolean;
+  public person: string;
 
   constructor( private http: HttpClient, private router: Router) {
     this.inputsProblem = [""];
@@ -49,7 +50,7 @@ export class EntryComponent implements OnInit {
   }
 
   public submitEntry(): void {
-    if (this.problemLanguage == undefined  || this.translationLanguage == undefined || this.listTitle == undefined){
+    if (this.problemLanguage == undefined  || this.translationLanguage == undefined || this.listTitle == undefined || this.person == undefined){
       this.error = true;
       return;
     }
@@ -58,7 +59,7 @@ export class EntryComponent implements OnInit {
         'Content-Type': 'application/json'
       })
     };
-    const entry = JSON.stringify({problemWords: this.inputsProblem, translationWords: this.inputsTranslation, title: this.listTitle, problemLanguage: this.problemLanguage, translationLanguage: this.translationLanguage});
+    const entry = JSON.stringify({problemWords: this.inputsProblem, translationWords: this.inputsTranslation, title: this.listTitle, problemLanguage: this.problemLanguage, translationLanguage: this.translationLanguage, person: this.person});
     this.http.post('http://localhost:8090/api/submit', entry, httpOptions).subscribe(
       (val) => {
         // POST call successful value returned in body
