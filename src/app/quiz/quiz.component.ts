@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {WordList} from '../../models/WordList';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ListEntry} from '../../models/ListEntry';
@@ -25,10 +25,12 @@ export class QuizComponent implements OnInit {
   total: number = 0;
   progress: number = 0;
   finished: boolean = false;
+  email: string;
 
-  public constructor(private http: HttpClient ,private route: ActivatedRoute) {
+  public constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe(params => {
       this.wordListId = params['wordListId'];
+      this.email = params['email'];
       this.getListById();
     });
   }
@@ -86,7 +88,26 @@ export class QuizComponent implements OnInit {
   }
 
   public QuizFinished(){
+    this.sendResults();
     this.finished = true;
+
+  }
+
+  sendResults(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    const entry = JSON.stringify({wordListId: this.wordListId, score: this.score, total: this.total, email: this.email});
+    this.http.post('http://localhost:8090/api/submitresult', entry, httpOptions).subscribe(
+      (val) => {
+        // POST call successful value returned in body
+      },
+      response => {
+      },
+      () => {
+      });
   }
 
   public DoQuiz(userAnswer: string) {
@@ -101,5 +122,9 @@ export class QuizComponent implements OnInit {
     this.userAnswer = "";
     this.PrepareQuizQuestion()
 
+  }
+
+  goToResults() {
+    this.router.navigate(['result'] , { queryParams: {"email": this.email} });
   }
 }

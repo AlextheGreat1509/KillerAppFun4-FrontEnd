@@ -3,6 +3,10 @@
   width: 800px;
 }
 
+.form-group{
+  margin: 0 auto;
+  width: 800px;
+}
 .btn-text{
   width: 100%;
   background-color: transparent;
@@ -10,12 +14,13 @@
 }
 
 .btn-primary{
-  margin-top: 10px;
+  margin-top: 5px;
   float: right;
 }
 
 .form-control{
   margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 h1{
