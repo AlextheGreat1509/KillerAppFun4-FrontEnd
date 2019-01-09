@@ -9,9 +9,6 @@ export class AppComponent {
   title = 'Learn App';
 
   public static getHost() : string{
-    if(isDevMode()){
-      return "http://"+location.hostname+":8090/";
-    }
     return "https://killerappfun4.herokuapp.com/";
   }
 }
