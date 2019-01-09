@@ -4,6 +4,7 @@ import {forEach} from '@angular/router/src/utils/collection';
 import {Router} from '@angular/router';
 import {until} from 'selenium-webdriver';
 import titleContains = until.titleContains;
+import {AppComponent} from '../app.component';
 
 
 @Component({
@@ -60,7 +61,7 @@ export class EntryComponent implements OnInit {
       })
     };
     const entry = JSON.stringify({problemWords: this.inputsProblem, translationWords: this.inputsTranslation, title: this.listTitle, problemLanguage: this.problemLanguage, translationLanguage: this.translationLanguage, personEmail: this.personEmail});
-    this.http.post('http://localhost:8080/api/submit', entry, httpOptions).subscribe(
+    this.http.post(AppComponent.getHost() + 'api/submit', entry, httpOptions).subscribe(
       (val) => {
         // POST call successful value returned in body
         this.success = val.toString();

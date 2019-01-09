@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {WordList} from '../../models/WordList';
 import {NavigationExtras, Router} from '@angular/router';
+import {AppComponent} from '../app.component';
 
 @Component({
   selector: 'app-display-list',
@@ -34,7 +35,7 @@ export class DisplayListComponent implements OnInit {
     };
 
     if (this.searchEntry != undefined) {
-      this.http.get<WordList>('http://localhost:8080/api/getlistsbyemail?email=' + this.searchEntry, httpOptions).subscribe(
+      this.http.get<WordList>(AppComponent.getHost() + 'api/getlistsbyemail?email=' + this.searchEntry, httpOptions).subscribe(
         (val) => {
           // POST call successful value returned in body
           this.original = val;

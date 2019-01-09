@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {WordList} from '../../models/WordList';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ListEntry} from '../../models/ListEntry';
+import {AppComponent} from '../app.component';
 
 @Component({
   selector: 'app-quiz',
@@ -42,7 +43,7 @@ export class QuizComponent implements OnInit {
       })
     };
 
-    this.http.get<WordList>('http://localhost:8080/api/getlistbyid?id='+this.wordListId, httpOptions).subscribe(
+    this.http.get<WordList>(AppComponent.getHost() + 'api/getlistbyid?id='+this.wordListId, httpOptions).subscribe(
       (val) => {
         this.wordList = val;
         this.total = this.wordList.listEntries.length;
@@ -100,7 +101,7 @@ export class QuizComponent implements OnInit {
       })
     };
     const entry = JSON.stringify({wordListId: this.wordListId, score: this.score, total: this.total, email: this.email});
-    this.http.post('http://localhost:8080/api/submitresult', entry, httpOptions).subscribe(
+    this.http.post(AppComponent.getHost() + 'api/submitresult', entry, httpOptions).subscribe(
       (val) => {
         // POST call successful value returned in body
       },
