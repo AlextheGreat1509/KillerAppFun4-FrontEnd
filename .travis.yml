@@ -19,7 +19,7 @@ before_script:
 
 script:
 - npm run e2e
-- ng build --base-href   https://alexthegreat1509.github.io/KillerAppFun4-FrontEnd/
+- ng build --prod --base-href   https://alexthegreat1509.github.io/KillerAppFun4-FrontEnd/
 
 deploy:
   provider: pages
