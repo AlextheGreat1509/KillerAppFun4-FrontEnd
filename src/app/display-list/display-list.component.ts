@@ -34,7 +34,7 @@ export class DisplayListComponent implements OnInit {
     };
 
     if (this.searchEntry != undefined) {
-      this.http.get<WordList>('http://localhost:8090/api/getlistsbyemail?email=' + this.searchEntry, httpOptions).subscribe(
+      this.http.get<WordList>('http://localhost:8080/api/getlistsbyemail?email=' + this.searchEntry, httpOptions).subscribe(
         (val) => {
           // POST call successful value returned in body
           this.original = val;

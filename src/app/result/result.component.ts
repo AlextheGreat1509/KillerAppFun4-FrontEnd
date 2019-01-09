@@ -35,7 +35,7 @@ export class ResultComponent implements OnInit {
     };
 
     if (this.email != undefined) {
-      this.http.get<Result>('http://localhost:8090/api/getresultsbyemail?email=' + this.email, httpOptions).subscribe(
+      this.http.get<Result>('http://localhost:8080/api/getresultsbyemail?email=' + this.email, httpOptions).subscribe(
         (val) => {
           // POST call successful value returned in body
           this.original = val;

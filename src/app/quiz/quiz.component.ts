@@ -42,7 +42,7 @@ export class QuizComponent implements OnInit {
       })
     };
 
-    this.http.get<WordList>('http://localhost:8090/api/getlistbyid?id='+this.wordListId, httpOptions).subscribe(
+    this.http.get<WordList>('http://localhost:8080/api/getlistbyid?id='+this.wordListId, httpOptions).subscribe(
       (val) => {
         this.wordList = val;
         this.total = this.wordList.listEntries.length;
@@ -100,7 +100,7 @@ export class QuizComponent implements OnInit {
       })
     };
     const entry = JSON.stringify({wordListId: this.wordListId, score: this.score, total: this.total, email: this.email});
-    this.http.post('http://localhost:8090/api/submitresult', entry, httpOptions).subscribe(
+    this.http.post('http://localhost:8080/api/submitresult', entry, httpOptions).subscribe(
       (val) => {
         // POST call successful value returned in body
       },
